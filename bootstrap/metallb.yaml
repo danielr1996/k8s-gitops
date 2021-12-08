@@ -14,14 +14,14 @@ spec:
     chart: metallb
     repoURL: https://metallb.github.io/metallb
     targetRevision: ~0.11.0
-  helm:
-    values: |
-      configInline:
-        address-pools:
-        - name: default
-          protocol: layer2
-          addresses:
-          - 10.0.204.0/22
+    helm:
+      values: |
+        configInline:
+          address-pools:
+          - name: default
+            protocol: layer2
+            addresses:
+            - 10.0.204.0/22
   syncPolicy:
     automated: {}
     syncOptions:

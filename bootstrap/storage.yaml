@@ -14,15 +14,15 @@ spec:
     chart: nfs-subdir-external-provisioner
     repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
     targetRevision: ~4.0.14
-  helm:
-    values: |
-      storageClass:
-        name: nfs
-        defaultClass: true
-        archiveOnDelete: false
-      nfs:
-        server: 10.0.0.5
-        path: //mnt/user/kubernetes
+    helm:
+      values: |
+        storageClass:
+          name: nfs
+          defaultClass: true
+          archiveOnDelete: false
+        nfs:
+          server: 10.0.0.5
+          path: //mnt/user/kubernetes
   syncPolicy:
     automated: {}
     syncOptions:

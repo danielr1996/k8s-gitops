@@ -1,7 +1,0 @@
-metallb:
-  configInline:
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - 10.0.204.1/22

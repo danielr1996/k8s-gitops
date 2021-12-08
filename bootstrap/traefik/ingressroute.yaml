@@ -4,6 +4,8 @@ kind: IngressRoute
 metadata:
   name: traefik-dashboard
   namespace: infra
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   entryPoints:
     - web

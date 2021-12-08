@@ -14,3 +14,6 @@ spec:
     path: metallb
     repoURL: https://github.com/danielr1996/k8s-gitops.git
     targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

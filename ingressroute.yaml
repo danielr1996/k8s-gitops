@@ -1,18 +1,18 @@
----
+# dashboard.yaml
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: paperless-ng-ingressroute
+  name: traefik-dashboard
+  namespace: infra
 spec:
   entryPoints:
     - web
     - websecure
   routes:
-    - match: Host(`paperless.app.local.danielr1996.de`)
+    - match: Host(`traefik.app.local.danielr1996.de`) && (PathPrefix(`/`) || PathPrefix(`/api`))
       kind: Rule
       services:
-        - name: '{{ .Release.Name }}-webserver'
-          kind: Service
-          port: 8000
+        - name: api@internal
+          kind: TraefikService
   tls:                              
     certResolver: letsencrypt

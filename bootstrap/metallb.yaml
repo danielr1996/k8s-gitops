@@ -11,9 +11,6 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: metallb
-    repoURL: https://github.com/danielr1996/k8s-gitops.git
-    targetRevision: HEAD
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+    chart: metallb
+    repoURL: https://metallb.github.io/metallb
+    targetRevision: ~0.11.0

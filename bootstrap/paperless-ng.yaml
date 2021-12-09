@@ -19,6 +19,8 @@ spec:
         persistence:
           basepath: "/mnt/user/kubernetes/paperless-ng"
           server: "10.0.0.5"
+        ingress:
+          url: paperless.app.local.danielr1996.de
   syncPolicy:
     automated: {}
     syncOptions:

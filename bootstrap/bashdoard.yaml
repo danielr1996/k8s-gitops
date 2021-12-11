@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: ghcr.io
+    repoURL: oci://ghcrio
     targetRevision: ~0.1.0
     chart: danielr1996/bashdoard
   syncPolicy:

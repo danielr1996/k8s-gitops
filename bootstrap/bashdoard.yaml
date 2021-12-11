@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: apps
     server: https://kubernetes.default.svc
-  project: apps
+  project: default
   source:
     repoURL: ghcr.io
     targetRevision: ~0.1.0

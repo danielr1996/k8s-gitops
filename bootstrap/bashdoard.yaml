@@ -11,9 +11,9 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: oci://ghcrio
+    chart: bashdoard
+    repoURL: https://danielr1996.github.io/k8s-charts
     targetRevision: ~0.1.0
-    chart: danielr1996/bashdoard
   syncPolicy:
     automated: {}
     syncOptions:

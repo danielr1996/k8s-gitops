@@ -22,8 +22,6 @@ spec:
           - --certificatesresolvers.letsencrypt.acme.email=danielrichter@posteo.de
           - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=hetzner
           - --certificatesresolvers.letsencrypt.acme.storage=/data/acme.json
-          - --providers.kubernetescrd.allowexternalnameservices
-          - --providers.kubernetesingress.allowexternalnameservices
         logs:
           general:
             level: INFO

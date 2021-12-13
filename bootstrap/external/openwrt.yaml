@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openwrt-external
+  namespace: external
+  labels:
+    app.kubernetes.io/name: homeopenwrtassistant-external
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: openwrt-external
+  template:
+    metadata:
+      labels:
+       app.kubernetes.io/name: openwrt-external
+    spec:
+      containers:
+      - name: k8s-external-proxy
+        image: ghcr.io/danielr1996/k8s-external-proxy:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: DESTINATION
+            value: 10.0.0.3:443
+          - name: MODE
+            value: HTTP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openwrt-external
+  namespace: external
+  labels:
+    app.kubernetes.io/name: openwrt-external
+spec:
+  selector:
+    app.kubernetes.io/name: openwrt-external
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: openwrt-external
+  namespace: external
+spec:
+  entryPoints:
+    - web 
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`openwrt.app.local.danielr1996.de`)
+      services:
+        - name: openwrt-external
+          port: 80
+  tls:
+    certResolver: letsencrypt
+
+---
+apiVersion: "bashdoard.danielr1996.de/v1alpha"
+kind: DashboardEntry
+metadata:
+  name: openwrt
+  namespace: external
+spec:
+  name: "OpenWrt"
+  url: https://openwrt.app.local.danielr1996.de
+  faviconLocation: /luci-static/bootstrap/favicon.png

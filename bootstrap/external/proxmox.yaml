@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxmox-external
+  namespace: external
+  labels:
+    app.kubernetes.io/name: proxmox-external
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: proxmox-external
+  template:
+    metadata:
+      labels:
+       app.kubernetes.io/name: proxmox-external
+    spec:
+      containers:
+      - name: k8s-external-proxy
+        image: ghcr.io/danielr1996/k8s-external-proxy:latest
+        ports:
+          - containerPort: 80
+        env:
+          - name: DESTINATION
+            value: 10.0.0.8:8006
+          - name: MODE
+            value: HTTP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: proxmox-external
+  namespace: external
+  labels:
+    app.kubernetes.io/name: proxmox-external
+spec:
+  selector:
+    app.kubernetes.io/name: proxmox-external
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: proxmox-external
+  namespace: external
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`proxmox.app.local.danielr1996.de`)
+      services:
+        - name: proxmox-external
+          port: 80
+  tls:
+    certResolver: letsencrypt
+
+---
+apiVersion: "bashdoard.danielr1996.de/v1alpha"
+kind: DashboardEntry
+metadata:
+  name: proxmox
+  namespace: external
+spec:
+  name: "Proxmox"
+  url: https://proxmox.app.local.danielr1996.de
+  faviconLocation: /pve2/images/logo-128.png

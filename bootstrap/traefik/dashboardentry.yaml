@@ -1,0 +1,9 @@
+apiVersion: "bashdoard.danielr1996.de/v1alpha"
+kind: DashboardEntry
+metadata:
+  name: traefik
+  namespace: infra
+spec:
+  name: "Traefik"
+  url: https://traefik.app.local.danielr1996.de
+  faviconLocation: /dashboard/statics/icons/favicon.ico

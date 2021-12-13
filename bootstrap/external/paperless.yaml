@@ -1,0 +1,9 @@
+apiVersion: "bashdoard.danielr1996.de/v1alpha"
+kind: DashboardEntry
+metadata:
+  name: paperless-ng
+  namespace: apps
+spec:
+  name: "Paperless"
+  url: https://paperless.app.local.danielr1996.de
+  faviconLocation: /favicon.ico

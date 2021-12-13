@@ -24,3 +24,14 @@ spec:
           scheme: h2c
   tls:
     certResolver: letsencrypt
+
+---
+apiVersion: "bashdoard.danielr1996.de/v1alpha"
+kind: DashboardEntry
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  name: "argocd"
+  url: https://argocd.app.local.danielr1996.de/
+  faviconLocation: /assets/favicon/favicon-32x32.png

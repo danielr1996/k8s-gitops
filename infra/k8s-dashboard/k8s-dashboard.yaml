@@ -13,7 +13,7 @@ spec:
   source:
     chart: kubernetes-dashboard
     repoURL: https://kubernetes.github.io/dashboard/
-    targetRevision: ~0.11.0
+    targetRevision: ~5.0.4
   syncPolicy:
     automated: {}
     syncOptions:
